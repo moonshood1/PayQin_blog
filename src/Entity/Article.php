@@ -62,6 +62,11 @@ class Article
     private $author;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="article")
+     */
+    private $category;
+
+    /**
      * @ORM\PrePersist
      */
     public function setCreatedAtValue()
@@ -142,6 +147,18 @@ class Article
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

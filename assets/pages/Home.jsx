@@ -1,22 +1,29 @@
 import React from "react";
-import Summary from "../components/Summary";
-import Features from "../components/Features";
-import Previous from "../components/Previous";
-import Footer from "../components/Footer";
+import Summary from "../components/wrappers/Summary";
+import Features from "../components/wrappers/Features";
+import Previous from "../components/wrappers/Previous";
+import Footer from "../components/wrappers/Footer";
+import Overlay from "../components/wrappers/Overlay";
 
-const Home = () => {
+const Home = ({ showOverlay, setShowOverlay }) => {
+  const handleClick = () => {
+    setShowOverlay(false);
+  };
   return (
     <div>
-      <div>
-        <Summary />
+      {showOverlay && <Overlay setShowOverlay={setShowOverlay} />}
+      <div onClick={handleClick}>
+        <div>
+          <Summary />
+        </div>
+        <div>
+          <Features />
+        </div>
+        <div>
+          <Previous />
+        </div>
+        <Footer />
       </div>
-      <div>
-        <Features />
-      </div>
-      <div>
-        <Previous />
-      </div>
-      <Footer />
     </div>
   );
 };

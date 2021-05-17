@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/wrappers/Navbar";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
+import Admin from "./pages/Admin";
+import Login from "./pages/Login";
 import Detail from "./pages/Details";
 import "./styles/app.css";
-import Footer from "./components/Footer";
 
 const App = () => {
+  const [showOverlay, setShowOverlay] = useState(false);
   return (
     <HashRouter>
       <div>
-        <Navbar />
-        <Switch>
-          <div>
-            <Route path="/details">
-              <Detail />
+        <div className="navbar">
+          <Navbar showOverlay={showOverlay} setShowOverlay={setShowOverlay} />
+        </div>
+        <main>
+          <Switch>
+            <Route path="/login">
+              <Login />
             </Route>
-          </div>
-          <div>
+            <Route path="/admin">
+              <Admin />
+            </Route>
+            <Route path="/article/:id">
+              <Detail
+                showOverlay={showOverlay}
+                setShowOverlay={setShowOverlay}
+              />
+            </Route>
             <Route path="/">
-              <Home />
+              <Home showOverlay={showOverlay} setShowOverlay={setShowOverlay} />
             </Route>
-          </div>
-        </Switch>
+          </Switch>
+        </main>
       </div>
     </HashRouter>
   );
