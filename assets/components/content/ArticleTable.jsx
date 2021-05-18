@@ -2,17 +2,34 @@ import React from "react";
 import { motion } from "framer-motion";
 import moment from "moment";
 
-const ArticleTable = ({ data }) => {
+const ArticleTable = ({ data, setData }) => {
+  const handleDelete = (id) => {
+    const originalData = [...data];
+    setData(data.filter((article) => article.id !== id));
+    fetch(`http://127.0.0.1:8000/api/articles/${+id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        console.log("Article supprimé");
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setData(originalData);
+      });
+  };
   return (
     <tbody>
       {data.map((article) => (
-        <tr key={article.id}>
+        <tr key={article.id} className="text-sm 2xl:text-md">
           <td className="h-12 select-none ">
             {" "}
-            {moment(article.createAt).format("MMMM DD, YYYY H:m")}{" "}
+            {moment(article.createAt).format("MMMM DD, YYYY")}{" "}
           </td>
           <td className="h-12 select-none "> {article.title} </td>
-          <td className="text-center select-none"> Louis Roger guirika </td>
+          <td className="text-center select-none">
+            {" "}
+            {article.author.firstName} {article.author.lastName}
+          </td>
           <td className="text-center select-none"> {article.likes} </td>
           <td className="text-center">
             <div className="text-gray-500">
@@ -54,7 +71,12 @@ const ArticleTable = ({ data }) => {
                   />
                 </svg>
               </motion.button>
-              <motion.button initial={{ scale: 1 }} whileHover={{ scale: 1.2 }}>
+              <motion.button
+                onClick={() => handleDelete(article.id)}
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.2 }}
+                disabled={article.likes > 7}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"

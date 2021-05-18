@@ -1,12 +1,27 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-const CatTable = ({ data }) => {
+const CatTable = ({ data, setCat }) => {
+  const handleDelete = (id) => {
+    const originalData = [...data];
+    setCat(data.filter((cat) => cat.id !== id));
+    fetch(`http://127.0.0.1:8000/api/categories/${+id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        console.log("Catégorie supprimée");
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setCat(originalData);
+      });
+  };
   return (
     <tbody>
       {data.map((cat) => (
-        <tr key={cat.id}>
+        <tr key={cat.id} className="text-sm 2xl:text-md">
           <td className="h-12 select-none"> {cat.name} </td>
-          <td className="text-center select-none"> 4 </td>
+          <td className="text-center select-none"> {cat.article.length} </td>
           <td className="text-center">
             <div className="text-gray-500">
               <motion.button initial={{ scale: 1 }} whileHover={{ scale: 1.2 }}>
@@ -25,7 +40,12 @@ const CatTable = ({ data }) => {
                   />
                 </svg>
               </motion.button>
-              <motion.button initial={{ scale: 1 }} whileHover={{ scale: 1.2 }}>
+              <motion.button
+                onClick={() => handleDelete(cat.id)}
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.2 }}
+                disabled={cat.article.length > 0}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"

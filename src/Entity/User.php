@@ -15,9 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
- * @ApiResource(
- *  normalizationContext={"groups"={"users_read"}}
- * )
+ * @ApiResource(normalizationContext={"groups"={"users_read"}})
  * @UniqueEntity("email",message="Cette adresse email est déja utilisée")
  */
 class User implements UserInterface
@@ -52,7 +50,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Regex(pattern="/^\w+/",message="Cette donnée ne peut commencer par un symbole spécial")
-     * @Groups({"users_read"})
+     * @Groups({"users_read","articles_read"})
      */
     private $firstName;
 
@@ -60,7 +58,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Regex(pattern="/^\w+/",message="Cette donnée ne peut commencer par un symbole spécial")
-     * @Groups({"users_read"})
+     * @Groups({"users_read","articles_read"})
      */
     private $lastName;
 

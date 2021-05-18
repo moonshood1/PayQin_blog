@@ -5,13 +5,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\HasLifecycleCallbacks()
- * @ApiResource
+ * @ApiResource(normalizationContext={"groups"={"articles_read"}})
  * @UniqueEntity("title",message="Un article possède déja ce titre")
  */
 class Article
@@ -20,6 +21,7 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"articles_read"})
      */
     private $id;
 
@@ -27,6 +29,7 @@ class Article
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Length(min=10,minMessage="Le titre de l'article est trop court")
+     * @Groups({"articles_read"})
      */
     private $title;
 
@@ -34,6 +37,7 @@ class Article
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Length(min=400,minMessage="Le contenu de l'article est trop court")
+     * @Groups({"articles_read"})
      */
     private $content;
 
@@ -41,28 +45,33 @@ class Article
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Url(message="Le type de donnée saisi n'est pas une URL valide")
+     * @Groups({"articles_read"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
+     * @Groups({"articles_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"articles_read"})
      */
     private $likes;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
+     * @Groups({"articles_read"})
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="article")
+     * @Groups({"articles_read"})
      */
     private $category;
 
