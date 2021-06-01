@@ -4,11 +4,17 @@ import Card from "../components/content/ArticleCard";
 import Footer from "../components/wrappers/Footer";
 import Overlay from "../components/wrappers/Overlay";
 import moment from "moment";
+import PreviousLoader from "../components/loaders/PreviousLoader";
+import ArticleLoader from "../components/loaders/_ArticleLoader";
 
 const Detail = ({ showOverlay, setShowOverlay }) => {
+  moment.locale("fr");
+  var locale = moment;
   const [article, setArticle] = useState([]);
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [author, setAuthor] = useState("");
   const { id } = useParams();
   const handleClick = () => {
     setShowOverlay(false);
@@ -20,7 +26,8 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
       })
       .then((data) => {
         setArticle(data);
-        setIsLoading(false);
+        setAuthor(data.author.firstName);
+        setLoading(false);
       });
     fetch("http://127.0.0.1:8000/get_random_three")
       .then((res) => {
@@ -38,29 +45,28 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
         onClick={handleClick}
       >
         {showOverlay && <Overlay />}
-        {isLoading && <p>Loading ...</p>}
-        {article && (
+        {loading && <ArticleLoader />}
+        {!loading && article && (
           <div>
             <div>
               <p className="text-sm text-gray-400">
-                <a href="https://moonshood1.github.io/payqin_v2">Home</a> {">"}{" "}
-                <Link to="/">Blog</Link> {">"}
+                <Link to="/">Accueil</Link> {">"}
                 <span className="text-blue-600">{article.title}</span>
               </p>
-              <div style={{ height: "500px" }} className="overflow-hidden">
+              <div style={{ height: "350px" }} className="overflow-hidden">
                 <img
                   src={article.image}
                   alt="Article image"
                   className="rounded-xl mt-4 w-full sm:w-full"
                 />
               </div>
-              <h1 className="text-black text-3xl mt-0 sm:mt-4 font-bold">
+              <h1 className="text-black text-3xl mt-2 sm:mt-4 font-bold">
                 {article.title}
               </h1>
               <p className="text-sm mt-4">
-                Published :{" "}
+                Publié le :{" "}
                 <span className="font-bold">
-                  {moment(article.createdAt).format("MMMM DD, YYYY")}
+                  {locale(article.createdAt).format("DD MMM YYYY")}
                 </span>
               </p>
               <div className="mt-5 flex">
@@ -73,12 +79,11 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
                 </div>
                 <div className="flex flex-wrap content-center">
                   <p className="text-sm ml-4">
-                    Written by :{" "}
-                    <span className="font-bold">Louis Roger Guirika</span>
+                    Redigé par : <span className="font-bold"> {author}</span>
                   </p>
                 </div>
               </div>
-              <div className="flex justify-end pr-14">
+              <div className="flex justify-end pr-4">
                 <span className="h-8 w-8 rounded-full bg-gray-200 text-sm mx-2 p-1 cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -129,17 +134,16 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
                 </span>
               </div>
             </div>
-            <div className="pr-14 mt-5 pb-10 border-gray-400 border-b-2">
+            <div className="px-2 2xl:pr-4 mt-5 pb-10 border-gray-400 border-b-2">
               <p className="mt-4">{article.content}</p>
             </div>
           </div>
         )}
         <div className="mt-10 pb-10">
-          <h1 className="text-3xl font-bold text-black mb-10">
-            Suggested Blogs
-          </h1>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3 gap-10">
-            {articles && <Card articles={articles} />}
+          <h1 className="text-3xl font-bold text-black mb-10">Suggestions</h1>
+          {isLoading && <PreviousLoader items={[1, 2, 3]} />}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3 gap-2 sm:gap-5">
+            {!isLoading && articles && <Card articles={articles} />}
           </div>
         </div>
       </div>

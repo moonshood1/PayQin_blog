@@ -12,45 +12,45 @@ const Footer = () => {
         />
       </div>
       <div className="col-span-2 mt-2 sm:mt-0">
-        <ul className="flex text-gray-500 text-lg">
+        <ul className="md:flex text-gray-500 text-md">
           <motion.li
             className="mx-2 sm:mx-3"
             initial={{ x: 0 }}
             whileHover={{ x: 1 }}
           >
-            <a href="#">About</a>
+            <a href="#">A Propos</a>
           </motion.li>
           <motion.li
             className="mx-2 sm:mx-3"
             initial={{ x: 0 }}
             whileHover={{ x: 1 }}
           >
-            <a href="#">Help</a>
+            <a href="#">Aide</a>
           </motion.li>
           <motion.li
             className="mx-2 sm:mx-3"
             initial={{ x: 0 }}
             whileHover={{ x: 1 }}
           >
-            <a href="#">Insurance</a>
+            <a href="#">Assurance</a>
           </motion.li>
           <motion.li
             className="mx-2 sm:mx-3"
             initial={{ x: 0 }}
             whileHover={{ x: 1 }}
           >
-            <a href="#">PayQin Ambassadors</a>
+            <a href="#">Ambassadeurs PayQin</a>
           </motion.li>
           <motion.li
             className="mx-2 sm:mx-3"
             initial={{ x: 0 }}
             whileHover={{ x: 1 }}
           >
-            <a href="#">Legal Notice</a>
+            <a href="#">Mentions Légales</a>
           </motion.li>
         </ul>
       </div>
-      <div className="mt-3 sm:mt-0 col-span-1 flex text-blue-400 text-lg pb-2 sm:pb-0">
+      <div className="mt-3 sm:mt-0 col-span-1 flex text-blue-400 text-md pb-2 sm:pb-0">
         <a href="#" className="mx-3">
           Facebook
         </a>
@@ -63,7 +63,7 @@ const Footer = () => {
           whileHover={{ scale: 1.1 }}
         >
           <a href="#" className="mx-3">
-            Contact us
+            Contactez nous
           </a>
         </motion.div>
       </div>

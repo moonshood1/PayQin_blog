@@ -28,9 +28,23 @@ class AppController extends AbstractController
      */
     public function getAll(ArticleRepository $repo)
     {
-        $articles = $repo->findBy([],['id'=> 'DESC']);
-        
+        $articles = $repo->findBy([],['id'=> 'DESC']);    
         return $this->json($articles);
+    }
+    
+
+    /**
+     * Fonction de recupération de l'article suivant le premier 
+     * @Route("/get_the_next", name="get_the_next_one")
+     * @param ArticleRepository $repo
+     */
+    public function getNext(ArticleRepository $repo)
+    {
+        $main = $repo->findBy([],['id'=>'DESC'],1);
+        $mainCatNumber = $main[0]->getCategory()->getId();
+        $article = $repo->findBy(['category'=> $mainCatNumber],['id'=> 'DESC'],1,1);
+
+        return $this->json($article);   
     }
 
 
@@ -57,11 +71,35 @@ class AppController extends AbstractController
         return $this->json($article);
     }
 
+  
+    /**
+     * Fonction de récupération de l'article suivant le main dans la meme catégorie
+     * @Route("/get_main_next_one_after",name="related_one_next_main")
+     */
+    public function getRelatedNextAfter(ArticleRepository $repo)
+    {
+        $main = $repo->findBy([],['id'=>'DESC'],1);
+        $mainCatNumber = $main[0]->getCategory()->getId();
+        $article = $repo->findBy(['category'=> $mainCatNumber],['id'=> 'DESC'],1,2);
 
+        return $this->json($article);
+    }
+
+
+    /**
+     * Fonction de récupération  des 3 derniers articles liés au main et suivant le second
+     * @Route("/get_related_two", name="related_three_articles")
+     * @param ArticleRepository $repo
+     */
     public function getRelated(ArticleRepository $repo)
     {
+        $main = $repo->findBy([],['id'=>'DESC'],1);
+        $mainCatNumber = $main[0]->getCategory()->getId();
+        $articles = $repo->findBy(['category'=> $mainCatNumber],['id'=> 'DESC'],2,3);
 
+        return $this->json($articles);
     }
+
 
     /**
      * Fonction qui renvoie les 6 derniers articles
@@ -86,6 +124,7 @@ class AppController extends AbstractController
 
         return $this->json($articles);
     }
+
 
     /**
      * Fonction qui recupere toutes les catégories

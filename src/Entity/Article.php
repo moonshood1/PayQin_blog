@@ -29,7 +29,7 @@ class Article
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Length(min=10,minMessage="Le titre de l'article est trop court")
-     * @Groups({"articles_read"})
+     * @Groups({"articles_read","cat_read"})
      */
     private $title;
 
@@ -45,14 +45,14 @@ class Article
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Url(message="Le type de donnée saisi n'est pas une URL valide")
-     * @Groups({"articles_read"})
+     * @Groups({"articles_read","cat_read"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
-     * @Groups({"articles_read"})
+     * @Groups({"articles_read","cat_read"})
      */
     private $createdAt;
 

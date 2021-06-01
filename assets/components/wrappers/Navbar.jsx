@@ -39,21 +39,20 @@ const Navbar = ({ showOverlay, setShowOverlay }) => {
       {/* Liens de navigation */}
       <div className="ml-auto">
         <ul className="hidden sm:flex">
-          <li className="px-6 text-lg xl:text-xl text-gray-600">
-            <a href="https://moonshood1.github.io/payqin_v2/#/">Products</a>
-          </li>
-          <li className="px-6 text-lg xl:text-xl text-gray-600">
-            <a href="https://moonshood1.github.io/payqin_v2/#/developpers">
-              Developpers
-            </a>{" "}
-          </li>
-          <li className="px-6 text-lg xl:text-xl text-gray-600">
-            <a href="https://moonshood1.github.io/payqin_v2/#/pricing">
-              Pricing
+          <li className="px-6 text-md 2xl:text-lg text-gray-600">
+            <a href="https://moonshood1.github.io/payqin_v2/#/">
+              Site Principal
             </a>
           </li>
-          <li className="px-6 text-lg xl:text-xl text-gray-600">
-            <a href="">Blog</a>
+          <li className="px-6 text-md 2xl:text-lg text-gray-600">
+            <a href="https://moonshood1.github.io/payqin_v2/#/developpers">
+              Developpeurs
+            </a>{" "}
+          </li>
+          <li className="px-6 text-md 2xl:text-lg text-gray-600">
+            <a href="https://moonshood1.github.io/payqin_v2/#/pricing">
+              Facturation
+            </a>
           </li>
         </ul>
       </div>

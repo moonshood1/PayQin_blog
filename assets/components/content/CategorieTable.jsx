@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CatTable = ({ data, setCat }) => {
   const handleDelete = (id) => {
@@ -9,10 +11,11 @@ const CatTable = ({ data, setCat }) => {
       method: "DELETE",
     })
       .then((res) => {
-        console.log("Catégorie supprimée");
+        toast.success("Catégorie supprimée avec succès");
       })
       .catch((error) => {
         console.log(error.response);
+        toast.error("Une erreur est survenue");
         setCat(originalData);
       });
   };
@@ -24,22 +27,27 @@ const CatTable = ({ data, setCat }) => {
           <td className="text-center select-none"> {cat.article.length} </td>
           <td className="text-center">
             <div className="text-gray-500">
-              <motion.button initial={{ scale: 1 }} whileHover={{ scale: 1.2 }}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <Link to={`/admin/category/${cat.id}`}>
+                <motion.button
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.2 }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                  />
-                </svg>
-              </motion.button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                    />
+                  </svg>
+                </motion.button>
+              </Link>
               <motion.button
                 onClick={() => handleDelete(cat.id)}
                 initial={{ scale: 1 }}

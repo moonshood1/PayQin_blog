@@ -29,6 +29,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Ce Champ est obligatoire")
      * @Assert\Email(message="Le type de donnée saisi n'est pas une adresse email valide ")
      * @Groups({"users_read"})
      */

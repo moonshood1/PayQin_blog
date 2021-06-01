@@ -8,6 +8,11 @@ import Login from "./pages/Login";
 import Detail from "./pages/Details";
 import authApi from "./services/authAPI";
 import "./styles/app.css";
+import ArticlePage from "./pages/AdminArticle";
+import CategoryPage from "./pages/AdminCategory";
+import UserPage from "./pages/AdminUser";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 authApi.setup();
 
@@ -35,6 +40,54 @@ const App = () => {
               )}
             ></Route>
             <Route
+              path="/admin/user/new"
+              render={(props) =>
+                isLogged ? (
+                  <UserPage
+                    setIslogged={setIslogged}
+                    isLogged={isLogged}
+                    userName={userName}
+                    {...props}
+                    setUserName={setUserName}
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            ></Route>
+            <Route
+              path="/admin/category/:id"
+              render={(props) =>
+                isLogged ? (
+                  <CategoryPage
+                    setIslogged={setIslogged}
+                    isLogged={isLogged}
+                    userName={userName}
+                    {...props}
+                    setUserName={setUserName}
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            ></Route>
+            <Route
+              path="/admin/article/:id"
+              render={(props) =>
+                isLogged ? (
+                  <ArticlePage
+                    setIslogged={setIslogged}
+                    isLogged={isLogged}
+                    userName={userName}
+                    {...props}
+                    setUserName={setUserName}
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            ></Route>
+            <Route
               path="/admin"
               render={(props) =>
                 isLogged ? (
@@ -60,6 +113,7 @@ const App = () => {
               <Home showOverlay={showOverlay} setShowOverlay={setShowOverlay} />
             </Route>
           </Switch>
+          <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
         </main>
       </div>
     </HashRouter>
