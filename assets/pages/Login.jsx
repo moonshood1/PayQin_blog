@@ -3,8 +3,15 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import authApi from "../services/authAPI";
 import { toast } from "react-toastify";
+import Overlay from "../components/wrappers/Overlay";
 
-const Login = ({ setIslogged, history, setUserName }) => {
+const Login = ({
+  setIslogged,
+  history,
+  setUserName,
+  showOverlay,
+  setShowOverlay,
+}) => {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -32,7 +39,7 @@ const Login = ({ setIslogged, history, setUserName }) => {
   };
 
   const handleClick = () => {
-    setIsError(false);
+    setShowOverlay(false);
   };
 
   const errorVariants = {
@@ -49,37 +56,11 @@ const Login = ({ setIslogged, history, setUserName }) => {
   };
   return (
     <>
-      {/* {isError && (
-        <motion.div
-          className="bg-red-800"
-          variants={errorVariants}
-          animate="visible"
-          initial="hidden"
-        >
-          <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between flex-wrap">
-              <div className="w-0 flex-1 flex items-center">
-                <span className="flex p-2 rounded-lg bg-red-800"></span>
-                <p className="ml-3 font-medium text-white truncate">
-                  <span className="md:hidden">Bad Credentials</span>
-                  <span className="hidden md:inline">Bad Credentials</span>
-                </p>
-              </div>
-
-              <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
-                <button
-                  type="button"
-                  className="-mr-1 flex text-white font-bold p-2 rounded-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
-                  onClick={handleClick}
-                >
-                  <span className="sr-only">Dismiss</span>X
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )} */}
-      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div
+        className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+        onClick={handleClick}
+      >
+        {showOverlay && <Overlay />}
         <div className="max-w-md w-full space-y-8">
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

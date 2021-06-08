@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -48,6 +49,9 @@ const Footer = () => {
           >
             <a href="#">Mentions Légales</a>
           </motion.li>
+          <li className="mx-2 sm:ml-10 sm:mx-6 text-gray-200 hover:text-gray-300">
+            <Link to="/admin">Admin</Link>
+          </li>
         </ul>
       </div>
       <div className="mt-3 sm:mt-0 col-span-1 flex text-blue-400 text-md pb-2 sm:pb-0">

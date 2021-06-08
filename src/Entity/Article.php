@@ -36,7 +36,7 @@ class Article
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Ce Champ est obligatoire")
-     * @Assert\Length(min=300,minMessage="Le contenu de l'article est trop court")
+     * @Assert\Length(min=50,minMessage="Le contenu de l'article est trop court")
      * @Groups({"articles_read"})
      */
     private $content;
@@ -77,65 +77,37 @@ class Article
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(min=100,minMessage="L'introduction est trop courte")
+     * @Assert\Length(min=30,minMessage="L'introduction est trop courte")
+     * @Groups({"articles_read"})
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(min=150,minMessage="Le paragraphe est trop court")
-     * @Groups({"articles_read"})
-     */
-    private $first_paragraph;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(min=150,minMessage="Le paragraphe est trop court")
-     * @Groups({"articles_read"})
-     */
-    private $second_paragraph;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(min=150,minMessage="Le paragraphe est trop court")
-     * @Groups({"articles_read"})
-     */
-    private $third_paragraph;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(min=150,minMessage="Le paragraphe est trop court")
-     * @Groups({"articles_read"})
-     */
-    private $fourth_paragraph;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(min=150,minMessage="La conclusion est trop courte")
      * @Groups({"articles_read"})
      */
     private $conclusion;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url(message="Le type de donnée saisi n'est pas une URL valide")
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(min=30,minMessage="Le contenu est trop court")
      * @Groups({"articles_read"})
      */
-    private $first_image;
+    private $secondContent;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Url(message="Le type de donnée saisi n'est pas une URL valide")
      * @Groups({"articles_read"})
      */
-    private $second_image;
+    private $secondImage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Url(message="Le type de donnée saisi n'est pas une URL valide")
      * @Groups({"articles_read"})
      */
-    private $third_image;
+    private $thirdImage;
 
     /**
      * @ORM\PrePersist
@@ -246,53 +218,6 @@ class Article
         return $this;
     }
 
-    public function getFirstParagraph(): ?string
-    {
-        return $this->first_paragraph;
-    }
-
-    public function setFirstParagraph(?string $first_paragraph): self
-    {
-        $this->first_paragraph = $first_paragraph;
-
-        return $this;
-    }
-
-    public function getSecondParagraph(): ?string
-    {
-        return $this->second_paragraph;
-    }
-
-    public function setSecondParagraph(?string $second_paragraph): self
-    {
-        $this->second_paragraph = $second_paragraph;
-
-        return $this;
-    }
-
-    public function getThirdParagraph(): ?string
-    {
-        return $this->third_paragraph;
-    }
-
-    public function setThirdParagraph(?string $third_paragraph): self
-    {
-        $this->third_paragraph = $third_paragraph;
-
-        return $this;
-    }
-
-    public function getFourthParagraph(): ?string
-    {
-        return $this->fourth_paragraph;
-    }
-
-    public function setFourthParagraph(?string $fourth_paragraph): self
-    {
-        $this->fourth_paragraph = $fourth_paragraph;
-
-        return $this;
-    }
 
     public function getConclusion(): ?string
     {
@@ -306,38 +231,38 @@ class Article
         return $this;
     }
 
-    public function getFirstImage(): ?string
+    public function getSecondContent(): ?string
     {
-        return $this->first_image;
+        return $this->secondContent;
     }
 
-    public function setFirstImage(?string $first_image): self
+    public function setSecondContent(?string $secondContent): self
     {
-        $this->first_image = $first_image;
+        $this->secondContent = $secondContent;
 
         return $this;
     }
 
     public function getSecondImage(): ?string
     {
-        return $this->second_image;
+        return $this->secondImage;
     }
 
-    public function setSecondImage(?string $second_image): self
+    public function setSecondImage(?string $secondImage): self
     {
-        $this->second_image = $second_image;
+        $this->secondImage = $secondImage;
 
         return $this;
     }
 
     public function getThirdImage(): ?string
     {
-        return $this->third_image;
+        return $this->thirdImage;
     }
 
-    public function setThirdImage(?string $third_image): self
+    public function setThirdImage(?string $thirdImage): self
     {
-        $this->third_image = $third_image;
+        $this->thirdImage = $thirdImage;
 
         return $this;
     }

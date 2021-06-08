@@ -7,7 +7,7 @@ const LinkCardMain = ({ main }) => {
       {main.map((article) => (
         <Link to={`/article/${article.id}`}>
           <div
-            className="h-24 w-80 bg-white rounded-xl shadow-lg cursor-pointer p-3"
+            className="h-auto w-80 bg-white rounded-xl shadow-lg cursor-pointer p-3"
             key={article.id}
           >
             <h2 className="font-bold text-black-900 ">{article.title}</h2>

@@ -9,7 +9,7 @@ const Field = ({
   type = "text",
   error = "",
 }) => (
-  <div className="mx-4 my-4">
+  <div className="mx-4 my-6">
     <label htmlFor={name} className="block text-sm font-medium text-gray-700">
       {label}
     </label>

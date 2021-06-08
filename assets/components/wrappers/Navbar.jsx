@@ -40,26 +40,9 @@ const Navbar = ({ showOverlay, setShowOverlay }) => {
       <div className="ml-auto">
         <ul className="hidden sm:flex">
           <li className="px-6 text-md 2xl:text-lg text-gray-600">
-            <a href="https://moonshood1.github.io/payqin_v2/#/">
-              Site Principal
-            </a>
-          </li>
-          <li className="px-6 text-md 2xl:text-lg text-gray-600">
-            <a href="https://moonshood1.github.io/payqin_v2/#/developpers">
-              Developpeurs
-            </a>{" "}
-          </li>
-          <li className="px-6 text-md 2xl:text-lg text-gray-600">
-            <a href="https://moonshood1.github.io/payqin_v2/#/pricing">
-              Facturation
-            </a>
+            <a href="https://payqin.com/#/">Visiter PayQin</a>
           </li>
         </ul>
-      </div>
-      {/* Bouton de traduction */}
-      <div className="flex sm:hidden">
-        <button>fr</button>
-        <button>en</button>
       </div>
     </div>
   );

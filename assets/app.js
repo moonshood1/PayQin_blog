@@ -36,6 +36,8 @@ const App = () => {
                   setIslogged={setIslogged}
                   {...props}
                   setUserName={setUserName}
+                  showOverlay={showOverlay}
+                  setShowOverlay={setShowOverlay}
                 />
               )}
             ></Route>
@@ -65,6 +67,8 @@ const App = () => {
                     userName={userName}
                     {...props}
                     setUserName={setUserName}
+                    showOverlay={showOverlay}
+                    setShowOverlay={setShowOverlay}
                   />
                 ) : (
                   <Redirect to="/login" />
@@ -81,6 +85,8 @@ const App = () => {
                     userName={userName}
                     {...props}
                     setUserName={setUserName}
+                    showOverlay={showOverlay}
+                    setShowOverlay={setShowOverlay}
                   />
                 ) : (
                   <Redirect to="/login" />
@@ -96,6 +102,8 @@ const App = () => {
                     setIslogged={setIslogged}
                     userName={userName}
                     setUserName={setUserName}
+                    showOverlay={showOverlay}
+                    setShowOverlay={setShowOverlay}
                     {...props}
                   />
                 ) : (

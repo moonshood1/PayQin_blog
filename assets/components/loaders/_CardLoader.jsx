@@ -5,7 +5,7 @@ const CardLoader = () => {
     <>
       {" "}
       <div>
-        <div className="mt-4 pb-2 w-64 sm:h-96 rounded overflow-hidden shadow-md sm:mt-0 sm:w-full relative">
+        <div className="mt-4 pb-2 w-56 h-80 sm:h-96 rounded overflow-hidden shadow-md sm:mt-0 sm:w-full relative">
           <div className="overflow-hidden h-2/3">
             <div className="w-full bg-gray-300 h-full flex justify-center flex-wrap content-center">
               <svg
@@ -25,8 +25,8 @@ const CardLoader = () => {
             </div>
           </div>
           <div className="mt-5 ml-4 animate-pulse">
-            <div class="h-5 bg-gray-300 rounded w-3/4"></div>
-            <div class="h-3 bg-gray-300 rounded w-1/3 mt-2"></div>
+            <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+            <div className="h-3 bg-gray-300 rounded w-1/3 mt-2"></div>
           </div>
         </div>
       </div>

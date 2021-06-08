@@ -6,7 +6,7 @@ const AdminMenu = () => {
   return (
     <>
       {" "}
-      <div className="grid w-full md:w-auto pl-2 col-span-1 mt-3 h-72 border border-md shadow-md rounded mr-2">
+      <div className="grid h-full w-full md:w-auto pl-2 col-span-1 mt-3 border border-md shadow-md rounded mr-2">
         <div className="flex flex-col text-gray-700 text-sm 2xl:text-md">
           <h3 className="text-lg font-bold uppercase mt-4 mb-6">
             Gestion du contenu{" "}
@@ -20,7 +20,7 @@ const AdminMenu = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-6 w-6 mr-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -43,7 +43,7 @@ const AdminMenu = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-6 w-6 mr-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -56,6 +56,29 @@ const AdminMenu = () => {
                 />
               </svg>{" "}
               Créer une catégorie
+            </motion.p>
+          </Link>
+          <Link to="/admin">
+            <motion.p
+              initial={{ x: 0 }}
+              whileHover={{ x: 10 }}
+              className="cursor-pointer mt-4 flex"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+                />
+              </svg>
+              Retour à l'administration
             </motion.p>
           </Link>
           {/* 

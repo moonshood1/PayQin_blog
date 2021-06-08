@@ -10,7 +10,7 @@ const FeaturesSecond = ({ featuredTwo }) => {
       {featuredTwo.map((feat) => (
         <Link to={`/article/${feat.id}`}>
           <div
-            className="h-72 mr-2 hover:shadow-md cursor-pointer"
+            className="h-auto mr-2 hover:shadow-md cursor-pointer pb-2"
             key={feat.id}
           >
             <div>

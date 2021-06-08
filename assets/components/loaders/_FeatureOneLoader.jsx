@@ -24,8 +24,8 @@ const FeatureOneLoader = () => {
           </div>
         </div>
         <div className="col-span-1 flex flex-wrap content-center mx-2">
-          <div class="h-5 bg-gray-300 rounded w-3/4"></div>
-          <div class="h-3 bg-gray-300 rounded w-1/3 mt-2"></div>
+          <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+          <div className="h-3 bg-gray-300 rounded w-1/3 mt-2"></div>
         </div>
       </div>
     </>

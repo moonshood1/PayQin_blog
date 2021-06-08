@@ -2,7 +2,7 @@ import React from "react";
 
 const Select = ({ name, value, label, onChange, error = "", children }) => {
   return (
-    <div className="mx-4 my-4">
+    <div className="mx-4 my-6">
       <div className="w-full">
         <label
           className="block text-sm font-medium text-gray-700"

@@ -4,24 +4,25 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import TableLoader from "../loaders/TableLoader";
+import articleAPI from "../../services/articleAPI";
 
 const ArticleTable = ({ data, setData, loading, setLoading }) => {
   moment.locale("fr");
   var locale = moment;
   const handleDelete = (id) => {
+    alert("Attention ! Vous allez supprimer un article");
     const originalData = [...data];
     setData(data.filter((article) => article.id !== id));
-    fetch(`http://127.0.0.1:8000/api/articles/${+id}`, {
-      method: "DELETE",
-    })
-      .then((res) => {
-        toast.success("Article supprimée avec succès");
-      })
-      .catch((error) => {
-        toast.error("Une erreur est survenue");
-        console.log(error.response);
-        setData(originalData);
-      });
+    try {
+      articleAPI.suppress(id);
+      toast.success("Article supprimé avec succès");
+      setLoading(true);
+      window.location.reload();
+    } catch (error) {
+      toast.error("Une erreur est survenue");
+      console.log(error.response);
+      setData(originalData);
+    }
   };
   return (
     <tbody>
@@ -93,7 +94,6 @@ const ArticleTable = ({ data, setData, loading, setLoading }) => {
                   onClick={() => handleDelete(article.id)}
                   initial={{ scale: 1 }}
                   whileHover={{ scale: 1.2 }}
-                  disabled={article.likes > 7}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

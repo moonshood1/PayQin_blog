@@ -17,7 +17,7 @@ const Previous = () => {
   }, []);
   return (
     <div className="px-2 md:px-48 2xl:px-72 mt-16 mb-32">
-      <h1 className="pl-4 sm:pl-0 text-3xl font-bold text-black mb-5">
+      <h1 className="pl-4 sm:pl-0 sm:text-3xl text-2xl font-bold text-black mb-5">
         Articles précédents
       </h1>
       {isLoading && <PreviousLoader items={[1, 2, 3, 4, 5, 6]} />}

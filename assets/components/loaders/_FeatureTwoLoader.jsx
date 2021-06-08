@@ -6,7 +6,10 @@ const FeatureTwoLoader = ({ items }) => {
     <>
       {" "}
       {cards.map((card) => (
-        <div className="h-72 mr-2 hover:shadow-md rounded-lg w-full overflow-hidden">
+        <div
+          className="h-72 mr-2 hover:shadow-md rounded-lg w-full overflow-hidden"
+          key={card}
+        >
           <div className="bg-gray-300 flex justify-center flex-wrap content-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +27,8 @@ const FeatureTwoLoader = ({ items }) => {
             </svg>
           </div>
           <div className="mt-2 mx-3">
-            <div class="h-5 bg-gray-300 rounded w-3/4"></div>
-            <div class="h-3 bg-gray-300 rounded w-1/3 mt-2"></div>
+            <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+            <div className="h-3 bg-gray-300 rounded w-1/3 mt-2"></div>
           </div>
         </div>
       ))}

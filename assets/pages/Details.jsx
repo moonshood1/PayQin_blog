@@ -19,8 +19,9 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
   const handleClick = () => {
     setShowOverlay(false);
   };
+  const url = "http://127.0.0.1:8000/api/articles/" + id;
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/articles/" + id)
+    fetch(url)
       .then((res) => {
         return res.json();
       })
@@ -37,7 +38,7 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
         setArticles(data);
         setIsLoading(false);
       });
-  }, []);
+  }, [url]);
   return (
     <>
       <div
@@ -60,7 +61,7 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
                   className="rounded-xl mt-4 w-full sm:w-full"
                 />
               </div>
-              <h1 className="text-black text-3xl mt-2 sm:mt-4 font-bold">
+              <h1 className="text-black text-xl sm:text-3xl mt-2 sm:mt-4 font-bold">
                 {article.title}
               </h1>
               <p className="text-sm mt-4">
@@ -71,11 +72,19 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
               </p>
               <div className="mt-5 flex">
                 <div>
-                  <img
-                    src="https://randomuser.me/api/portraits/women/33.jpg"
-                    alt=""
-                    className="rounded-full h-16 w-16"
-                  />
+                  {(author.picture && (
+                    <img
+                      src={author.picture}
+                      alt=""
+                      className="rounded-full h-16 w-16"
+                    />
+                  )) || (
+                    <img
+                      src="https://res.cloudinary.com/dhc0siki5/image/upload/v1623066023/payqin/website/Profile_avatar_placeholder_large_fjauj8.png"
+                      alt=""
+                      className="rounded-full h-16 w-16"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-wrap content-center">
                   <p className="text-sm ml-4">
@@ -83,6 +92,7 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
                   </p>
                 </div>
               </div>
+              {/* 
               <div className="flex justify-end pr-4">
                 <span className="h-8 w-8 rounded-full bg-gray-200 text-sm mx-2 p-1 cursor-pointer">
                   <svg
@@ -132,10 +142,53 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
                     />
                   </svg>
                 </span>
-              </div>
+              </div> */}
             </div>
-            <div className="px-2 2xl:pr-4 mt-5 pb-10 border-gray-400 border-b-2">
-              <p className="mt-4">{article.content}</p>
+            <div className="pb-10 border-gray-400 border-b-2">
+              {article.introduction && (
+                <div className="px-2 2xl:pr-4 mt-2 ">
+                  <p className="mt-4 text-md sm:text-xl text-gray-700 font-bold">
+                    {article.introduction}
+                  </p>
+                </div>
+              )}
+              <div className="px-2 2xl:pr-4 mt-2 ">
+                <p className="mt-4">{article.content}</p>
+              </div>
+              {article.secondImage && (
+                <div
+                  style={{ height: "270px" }}
+                  className="overflow-hidden px-2 2xl:pr-4 mt-2 "
+                >
+                  <img
+                    src={article.secondImage}
+                    alt="Article image"
+                    className="rounded-xl mt-4 w-full sm:w-full"
+                  />
+                </div>
+              )}
+              {article.secondContent && (
+                <div className="px-2 2xl:pr-4 mt-2 ">
+                  <p className="mt-4">{article.secondContent}</p>
+                </div>
+              )}
+              {article.thirdImage && (
+                <div
+                  style={{ height: "270px" }}
+                  className="overflow-hidden px-2 2xl:pr-4 mt-2 "
+                >
+                  <img
+                    src={article.thirdImage}
+                    alt="Article image"
+                    className="rounded-xl mt-4 w-full sm:w-full"
+                  />
+                </div>
+              )}
+              {article.conclusion && (
+                <div className="px-2 2xl:pr-4 mt-5 ">
+                  <p className="mt-4">{article.conclusion}</p>
+                </div>
+              )}
             </div>
           </div>
         )}

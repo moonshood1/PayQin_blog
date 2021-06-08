@@ -3,9 +3,18 @@ import AdminMenu from "../components/wrappers/AdminMenu";
 import Field from "../components/forms/Field";
 import categoryApi from "../services/categoryAPI";
 import { toast } from "react-toastify";
+import Overlay from "../components/wrappers/Overlay";
 
 const CategoryPage = (props) => {
-  const { userName, isLogged, setIslogged, history, setUserName } = props;
+  const {
+    userName,
+    isLogged,
+    setIslogged,
+    history,
+    setUserName,
+    showOverlay,
+    setShowOverlay,
+  } = props;
   const { id = "new" } = props.match.params;
 
   const [category, setCategory] = useState({
@@ -30,6 +39,10 @@ const CategoryPage = (props) => {
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
     setCategory({ ...category, [name]: value });
+  };
+
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
   };
 
   const handleSubmit = async (event) => {
@@ -74,7 +87,8 @@ const CategoryPage = (props) => {
 
   return (
     <>
-      <div className="mt-3 px-4 mb-6">
+      <div className="mt-3 px-4 mb-6" onClick={handleCloseOverlay}>
+        {showOverlay && <Overlay />}
         <div>
           <h1 className="text-xl 2xl:text-3xl font-bold uppercase">
             Gestion des catégories du blog PayQin

@@ -2,22 +2,21 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import categoryAPI from "../../services/categoryAPI";
 
-const CatTable = ({ data, setCat }) => {
+const CatTable = ({ data, setCat, catLoading }) => {
   const handleDelete = (id) => {
+    alert("Attention ! Vous allez supprimer une catégorie");
     const originalData = [...data];
     setCat(data.filter((cat) => cat.id !== id));
-    fetch(`http://127.0.0.1:8000/api/categories/${+id}`, {
-      method: "DELETE",
-    })
-      .then((res) => {
-        toast.success("Catégorie supprimée avec succès");
-      })
-      .catch((error) => {
-        console.log(error.response);
-        toast.error("Une erreur est survenue");
-        setCat(originalData);
-      });
+    try {
+      categoryAPI.suppress(id);
+      toast.success("Catégorie supprimée avec succès");
+    } catch (error) {
+      console.log(error.response);
+      toast.error("Une erreur est survenue");
+      setCat(originalData);
+    }
   };
   return (
     <tbody>

@@ -31,9 +31,11 @@ const Summary = () => {
   }, []);
   return (
     <>
-      <div className="bg-gray-200 md:flex md:justify-center pt-16 pb-4 md:gap-x-44 2xl:gap-x-5">
+      <div className="bg-gray-200 md:flex md:justify-center px-8 pt-8 sm:pt-16 sm:px-0 pb-8 sm:pb-6 md:gap-x-44 2xl:gap-x-5">
         {lastOneLoading && <MainLoading />}
-        {!lastOneLoading && main && <MainArticle main={main} />}
+        {!lastOneLoading && main && (
+          <MainArticle main={main} articles={articles} />
+        )}
         <div className="hidden sm:grid">
           {lastOneLoading && <LinkMainLoading />}
           {!lastOneLoading && main && <LinkCardMain main={main} />}

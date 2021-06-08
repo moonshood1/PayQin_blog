@@ -55,7 +55,7 @@ const Features = () => {
   }, []);
   return (
     <div className="bg-white pt-16 pb-4 ">
-      <h1 className="pl-4 md:pl-44 2xl:pl-72 text-3xl font-bold text-black mb-5">
+      <h1 className="pl-4 md:pl-44 2xl:pl-72 text-2xl sm:text-3xl font-bold text-black mb-5">
         Dans la même catégorie
       </h1>
       <div className="grid md:grid-cols-2 ">

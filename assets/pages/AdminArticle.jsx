@@ -7,21 +7,41 @@ import articleAPI from "../services/articleAPI";
 import Select from "../components/forms/Select";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ArticlePattern from "../components/wrappers/ArticlePattern";
+import Overlay from "../components/wrappers/Overlay";
 
 const ArticlePage = (props) => {
-  const { userName, isLogged, setIslogged, history, setUserName } = props;
+  const {
+    userName,
+    isLogged,
+    setIslogged,
+    history,
+    setUserName,
+    showOverlay,
+    setShowOverlay,
+  } = props;
   const { id = "new" } = props.match.params;
   const [article, setArticle] = useState({
     title: "",
     image: "",
     content: "",
     category: "",
+    introduction: "",
+    secondContent: "",
+    secondImage: "",
+    thirdImage: "",
+    conclusion: "",
   });
   const [errors, setErrors] = useState({
     title: "",
     image: "",
     content: "",
     category: "",
+    introduction: "",
+    secondContent: "",
+    secondImage: "",
+    thirdImage: "",
+    conclusion: "",
   });
   const [editing, setEditing] = useState(false);
   const [cat, setCat] = useState([]);
@@ -30,8 +50,26 @@ const ArticlePage = (props) => {
 
   const fetchArticle = async (id) => {
     try {
-      const { title, image, content } = await articleAPI.find(id);
-      setArticle({ title, image, content });
+      const {
+        title,
+        image,
+        content,
+        introduction,
+        secondContent,
+        secondImage,
+        thirdImage,
+        conclusion,
+      } = await articleAPI.find(id);
+      setArticle({
+        title,
+        image,
+        content,
+        introduction,
+        secondContent,
+        secondImage,
+        thirdImage,
+        conclusion,
+      });
     } catch (error) {
       toast.error("Erreur lors du chargement de l'article");
       console.log(error.response);
@@ -43,6 +81,11 @@ const ArticlePage = (props) => {
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
     setArticle({ ...article, [name]: value });
+  };
+
+  // Gestion de l'overlay
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
   };
 
   // Gestion de la soumission du formulaire
@@ -105,7 +148,8 @@ const ArticlePage = (props) => {
   return (
     <>
       {" "}
-      <div className="mt-3 px-4 mb-6">
+      <div className="mt-3 px-4 mb-6" onClick={handleCloseOverlay}>
+        {showOverlay && <Overlay />}
         <div>
           <h1 className="text-xl 2xl:text-3xl font-bold uppercase">
             Gestion des articles du blog PayQin
@@ -123,7 +167,8 @@ const ArticlePage = (props) => {
         <div className="grid md:grid-cols-5">
           <div className="grid w-full md:w-auto">
             <AdminMenu />
-            <div>
+            <ArticlePattern article={article} editing={editing} />
+            <div className="mt-4">
               <p>
                 <button
                   className="text-red-400 font-bold hover:text-red-900 text-lg h-8 w-36 rounded border-red-200 border-2"
@@ -156,7 +201,7 @@ const ArticlePage = (props) => {
                 <Field
                   name="image"
                   type="text"
-                  label="Image de l'article"
+                  label="Image principale de l'article"
                   value={article.image}
                   onChange={handleChange}
                   placeholder="https://www.payqin.com/wp-content/uploads/2020/09/n3-1.png"
@@ -180,12 +225,60 @@ const ArticlePage = (props) => {
                     ))}
                 </Select>
                 <LongField
+                  value={article.introduction}
+                  onChange={handleChange}
+                  name="introduction"
+                  label="Introduction de l'article"
+                  placeholder="Cette valeur est totalement optionelle"
+                  error={errors.introduction}
+                  rows={4}
+                />
+                <LongField
                   value={article.content}
                   onChange={handleChange}
                   name="content"
                   label="Contenu de l'article"
-                  placeholder="lorem ipsum"
+                  placeholder="Block principal de l'article"
+                  rows={10}
                   error={errors.content}
+                />
+                <div className="mt-4">
+                  <LongField
+                    value={article.secondContent}
+                    onChange={handleChange}
+                    name="secondContent"
+                    label="Suite de l'article"
+                    placeholder="Block Secondaire de l'article "
+                    rows={10}
+                    error={errors.secondContent}
+                  />
+                  <Field
+                    name="secondImage"
+                    type="text"
+                    label="Seconde Image de l'article (Optionnelle)"
+                    value={article.secondImage}
+                    onChange={handleChange}
+                    placeholder="https://www.payqin.com/wp-content/uploads/2020/09/n3-1.png"
+                    error={errors.secondImage}
+                  />
+                  <Field
+                    name="thirdImage"
+                    type="text"
+                    label="Derniere Image de l'article (Optionnelle)"
+                    value={article.thirdImage}
+                    onChange={handleChange}
+                    placeholder="https://www.payqin.com/wp-content/uploads/2020/09/n3-1.png"
+                    error={errors.thirdImage}
+                  />
+                </div>
+                <LongField
+                  value={article.conclusion}
+                  onChange={handleChange}
+                  name="conclusion"
+                  label="Conclusion de l'article"
+                  placeholder="Cette valeur est totalement optionelle"
+                  error={errors.conclusion}
+                  rows={4}
                 />
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button

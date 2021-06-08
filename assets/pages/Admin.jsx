@@ -6,13 +6,24 @@ import authApi from "../services/authAPI";
 import Pagination from "../components/content/Pagination";
 import ArticleCreation from "../components/wrappers/ArticleCreation";
 import { toast } from "react-toastify";
+import Overlay from "../components/wrappers/Overlay";
+import Loader from "../components/loaders/_Loader";
 
-const Admin = ({ isLogged, setIslogged, history, userName, setUserName }) => {
+const Admin = ({
+  isLogged,
+  setIslogged,
+  history,
+  userName,
+  setUserName,
+  showOverlay,
+  setShowOverlay,
+}) => {
   const [articleshow, setArticleshow] = useState(false);
   const [data, setData] = useState([]);
   const [cat, setCat] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [catLoading, setCatLoading] = useState(true);
   useEffect(() => {
     fetch("http://127.0.0.1:8000/get_all_articles")
       .then((res) => {
@@ -33,6 +44,7 @@ const Admin = ({ isLogged, setIslogged, history, userName, setUserName }) => {
       })
       .then((data) => {
         setCat(data);
+        setCatLoading(false);
       })
       .catch((error) => {
         console.log(error.response);
@@ -42,6 +54,10 @@ const Admin = ({ isLogged, setIslogged, history, userName, setUserName }) => {
 
   const handleChangePage = (page) => {
     setCurrentPage(page);
+  };
+
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
   };
 
   const handleClick = () => {
@@ -65,7 +81,8 @@ const Admin = ({ isLogged, setIslogged, history, userName, setUserName }) => {
   return (
     <>
       {articleshow && <ArticleCreation setArticleshow={setArticleshow} />}
-      <div className="mt-3 px-4 mb-6">
+      <div className="mt-3 px-4 mb-6" onClick={handleCloseOverlay}>
+        {showOverlay && <Overlay />}
         <div>
           <h1 className="text-xl 2xl:text-3xl font-bold uppercase">
             Gestion du blog PayQin
@@ -80,7 +97,7 @@ const Admin = ({ isLogged, setIslogged, history, userName, setUserName }) => {
           </div>
         )}
 
-        <div className="grid grid-cols-5">
+        <div className="grid sm:grid-cols-5">
           <div className="grid">
             <AdminMenu setArticleshow={setArticleshow} />
             <div className="mt-5">
@@ -96,7 +113,7 @@ const Admin = ({ isLogged, setIslogged, history, userName, setUserName }) => {
           </div>
           <div className="grid col-span-4">
             <div className="mt-3">
-              <div className="w-full h-96 rounded border border-md shadow-lg">
+              <div className="w-auto sm:w-full h-auto sm:h-96 rounded border border-md shadow-lg overflow-x-auto sm:overflow-x-hidden">
                 <table className="table-fixed w-full mt-4 ml-4">
                   <thead className="text-sm select-none 2xl:text-lg">
                     <tr>
@@ -136,7 +153,13 @@ const Admin = ({ isLogged, setIslogged, history, userName, setUserName }) => {
                       <th className="text-center">Actions</th>
                     </tr>
                   </thead>
-                  {cat && <CatTable data={cat} setCat={setCat} />}
+                  {cat && (
+                    <CatTable
+                      data={cat}
+                      setCat={setCat}
+                      catLoading={catLoading}
+                    />
+                  )}
                 </table>
               </div>
             </div>

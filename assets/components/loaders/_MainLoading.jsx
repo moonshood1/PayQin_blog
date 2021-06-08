@@ -4,8 +4,8 @@ const MainLoading = () => {
   return (
     <>
       {" "}
-      <div className="text-center w-1/2">
-        <div className=" rounded-2xl h-96 bg-gray-300 flex justify-center flex-wrap content-center ">
+      <div className="text-center w-full sm:w-1/2">
+        <div className=" rounded-2xl h-64 sm:h-96  bg-gray-300 flex justify-center flex-wrap content-center ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-36 w-36 text-gray-100 animate-pulse"
@@ -21,7 +21,7 @@ const MainLoading = () => {
             />
           </svg>
         </div>
-        <div class="h-7 bg-gray-300 rounded w-3/4 mt-3"></div>
+        <div className="h-7 bg-gray-300 rounded w-3/4 mt-3"></div>
       </div>
     </>
   );
