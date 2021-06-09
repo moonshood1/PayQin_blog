@@ -1,3 +1,4 @@
+require("dotenv").config();
 const Encore = require("@symfony/webpack-encore");
 const PurgeCssPlugin = require("purgecss-webpack-plugin");
 const glob = require("glob-all");
@@ -28,15 +29,20 @@ Encore.setOutputPath("public/build/")
   .enablePostCssLoader()
   .enableReactPreset();
 
-  if (Encore.isProduction()) {
-    Encore.addPlugin(
-      new PurgeCssPlugin({
-        paths: glob.sync([path.join(__dirname, "templates/**/*.html.twig")]),
-        defaultExtractor: (content) => {
-          return content.match(/[\w-/:]+(?<!:)/g) || [];
-        },
-      })
-    );
-  }
+Encore.configureDefinePlugin((options) => {
+  options["process.env"].API_PLATFORM_URL = process.env.API_PLATFORM_URL;
+  options["process.env"].OWN_API_URL = process.env.OWN_API_URL;
+});
+
+if (Encore.isProduction()) {
+  Encore.addPlugin(
+    new PurgeCssPlugin({
+      paths: glob.sync([path.join(__dirname, "templates/**/*.html.twig")]),
+      defaultExtractor: (content) => {
+        return content.match(/[\w-/:]+(?<!:)/g) || [];
+      },
+    })
+  );
+}
 
 module.exports = Encore.getWebpackConfig();

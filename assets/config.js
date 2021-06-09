@@ -1,10 +1,12 @@
-export const API_URL = "http://127.0.0.1:8000/api/";
+export const API_URL = process.env.API_PLATFORM_URL;
 
 export const ARTICLES_API = API_URL + "articles";
 export const CATEGORY_API = API_URL + "categories";
+export const USER_API = API_URL + "users";
+
 export const LOGIN_API = API_URL + "login_check";
 
-export const OWN_API = "http://127.0.0.1:8000/";
+export const OWN_API = process.env.OWN_API_URL;
 
 export const GET_RANDOM_THREE = OWN_API + "get_random_three";
 export const GET_LAST_THREE = OWN_API + "get_last_three";

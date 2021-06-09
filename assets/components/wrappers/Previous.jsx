@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Card from "../content/ArticleCard";
 import PreviousLoader from "../loaders/PreviousLoader";
+import { GET_PREVIOUS_SIX } from "../../config";
 
 const Previous = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get_previous_six")
+    fetch(GET_PREVIOUS_SIX)
       .then((res) => {
         return res.json();
       })

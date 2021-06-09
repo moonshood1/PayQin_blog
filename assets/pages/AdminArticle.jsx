@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ArticlePattern from "../components/wrappers/ArticlePattern";
 import Overlay from "../components/wrappers/Overlay";
+import { GET_ALL_CATEGORIES } from "../config";
 
 const ArticlePage = (props) => {
   const {
@@ -123,7 +124,7 @@ const ArticlePage = (props) => {
       fetchArticle(id);
     }
     axios
-      .get("http://127.0.0.1:8000/get_all_categories")
+      .get(GET_ALL_CATEGORIES)
       .then((response) => response.data)
       .then((data) => {
         setCat(data);

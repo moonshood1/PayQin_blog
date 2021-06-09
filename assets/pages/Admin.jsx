@@ -4,10 +4,9 @@ import CatTable from "../components/content/CategorieTable";
 import AdminMenu from "../components/wrappers/AdminMenu";
 import authApi from "../services/authAPI";
 import Pagination from "../components/content/Pagination";
-import ArticleCreation from "../components/wrappers/ArticleCreation";
 import { toast } from "react-toastify";
 import Overlay from "../components/wrappers/Overlay";
-import Loader from "../components/loaders/_Loader";
+import { GET_ALL_CATEGORIES, GET_ALL_ARTICLES } from "../config";
 
 const Admin = ({
   isLogged,
@@ -18,14 +17,13 @@ const Admin = ({
   showOverlay,
   setShowOverlay,
 }) => {
-  const [articleshow, setArticleshow] = useState(false);
   const [data, setData] = useState([]);
   const [cat, setCat] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [catLoading, setCatLoading] = useState(true);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get_all_articles")
+    fetch(GET_ALL_ARTICLES)
       .then((res) => {
         return res.json();
       })
@@ -38,7 +36,7 @@ const Admin = ({
         console.log(error.response);
         toast.error("Erreur lors du chargement des articles");
       });
-    fetch("http://127.0.0.1:8000/get_all_categories")
+    fetch(GET_ALL_CATEGORIES)
       .then((res) => {
         return res.json();
       })
@@ -80,7 +78,6 @@ const Admin = ({
 
   return (
     <>
-      {articleshow && <ArticleCreation setArticleshow={setArticleshow} />}
       <div className="mt-3 px-4 mb-6" onClick={handleCloseOverlay}>
         {showOverlay && <Overlay />}
         <div>
@@ -99,7 +96,7 @@ const Admin = ({
 
         <div className="grid sm:grid-cols-5">
           <div className="grid">
-            <AdminMenu setArticleshow={setArticleshow} />
+            <AdminMenu />
             <div className="mt-5">
               <p>
                 <button

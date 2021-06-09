@@ -106,7 +106,7 @@ const CategoryPage = (props) => {
         <div className="grid md:grid-cols-5">
           <div className="grid w-full md:w-auto">
             <AdminMenu />
-            <div>
+            <div className="mt-6">
               <p>
                 <button
                   className="text-red-400 font-bold hover:text-red-900 text-lg h-8 w-36 rounded border-red-200 border-2"

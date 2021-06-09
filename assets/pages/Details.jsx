@@ -6,6 +6,8 @@ import Overlay from "../components/wrappers/Overlay";
 import moment from "moment";
 import PreviousLoader from "../components/loaders/PreviousLoader";
 import ArticleLoader from "../components/loaders/_ArticleLoader";
+import { ARTICLES_API } from "../config";
+import { GET_RANDOM_THREE } from "../config";
 
 const Detail = ({ showOverlay, setShowOverlay }) => {
   moment.locale("fr");
@@ -19,7 +21,7 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
   const handleClick = () => {
     setShowOverlay(false);
   };
-  const url = "http://127.0.0.1:8000/api/articles/" + id;
+  const url = ARTICLES_API + "/" + id;
   useEffect(() => {
     fetch(url)
       .then((res) => {
@@ -30,7 +32,7 @@ const Detail = ({ showOverlay, setShowOverlay }) => {
         setAuthor(data.author.firstName);
         setLoading(false);
       });
-    fetch("http://127.0.0.1:8000/get_random_three")
+    fetch(GET_RANDOM_THREE)
       .then((res) => {
         return res.json();
       })

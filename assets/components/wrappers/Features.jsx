@@ -6,6 +6,7 @@ import FeaturesSecond from "../content/Features";
 import FeatureMainLoader from "../loaders/_FeatureMainLoader";
 import FeatureOneLoader from "../loaders/_FeatureOneLoader";
 import FeatureTwoLoader from "../loaders/_FeatureTwoLoader";
+import { GET_THE_NEXT, GET_RELATED_TWO, GET_AFTER_MAIN } from "../../config";
 
 const Features = () => {
   const [main, setMain] = useState([]);
@@ -16,7 +17,7 @@ const Features = () => {
   const [featureTwoLoading, setFeatureTwoLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get_the_next")
+    fetch(GET_THE_NEXT)
       .then((res) => {
         return res.json();
       })
@@ -28,7 +29,7 @@ const Features = () => {
         console.log(error.response);
         toast.error("Une erreur est survenue");
       });
-    fetch("http://127.0.0.1:8000/get_related_two")
+    fetch(GET_RELATED_TWO)
       .then((res) => {
         return res.json();
       })
@@ -40,7 +41,7 @@ const Features = () => {
         console.log(error.response);
         toast.error("Une erreur est survenue");
       });
-    fetch("http://127.0.0.1:8000/get_main_next_one_after")
+    fetch(GET_AFTER_MAIN)
       .then((res) => {
         return res.json();
       })

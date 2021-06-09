@@ -5,6 +5,7 @@ import MainArticle from "../content/MainArticle";
 import LinkCardLoading from "../loaders/_LinkCardLoading";
 import LinkMainLoading from "../loaders/_LinkMainLoading";
 import MainLoading from "../loaders/_MainLoading";
+import { GET_LAST_THREE, GET_LAST_ONE } from "../../config";
 
 const Summary = () => {
   const [articles, setArticles] = useState([]);
@@ -12,7 +13,7 @@ const Summary = () => {
   const [lastThreeLoading, setLastThreeLoading] = useState(true);
   const [lastOneLoading, setLastOneLoading] = useState(true);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get_last_three")
+    fetch(GET_LAST_THREE)
       .then((res) => {
         return res.json();
       })
@@ -20,7 +21,7 @@ const Summary = () => {
         setArticles(data);
         setLastThreeLoading(false);
       });
-    fetch("http://127.0.0.1:8000/get_last_one")
+    fetch(GET_LAST_ONE)
       .then((res) => {
         return res.json();
       })

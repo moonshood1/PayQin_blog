@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import { LOGIN_API } from "../config";
 
 function logout() {
   window.localStorage.removeItem("token");
@@ -9,7 +10,7 @@ function logout() {
 
 function authenticate(credentials) {
   return axios
-    .post("http://127.0.0.1:8000/api/login_check", credentials)
+    .post(LOGIN_API, credentials)
     .then((res) => res.data.token)
     .then((token) => {
       // Stockage du token dans le local storage
