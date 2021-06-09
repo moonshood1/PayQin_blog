@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
+import { LOGIN_API } from "../config";
 
 function create(user) {
-  return axios.post("http://127.0.0.1:8000/api/users", user);
+  return axios.post(LOGIN_API, user);
 }
 
 export default {

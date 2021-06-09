@@ -1,22 +1,21 @@
 import React from "react";
 import axios from "axios";
+import { CATEGORY_API } from "../config";
 
 function find(id) {
-  return axios
-    .get("http://127.0.0.1:8000/api/categories/" + id)
-    .then((response) => response.data);
+  return axios.get(CATEGORY_API + "/" + id).then((response) => response.data);
 }
 
 function update(id, category) {
-  return axios.put("http://127.0.0.1:8000/api/categories/" + id, category);
+  return axios.put(CATEGORY_API + "/" + id, category);
 }
 
 function create(category) {
-  return axios.post("http://127.0.0.1:8000/api/categories", category);
+  return axios.post(CATEGORY_API, category);
 }
 
 function suppress(id) {
-  return axios.delete("http://127.0.0.1:8000/api/categories/" + id);
+  return axios.delete(CATEGORY_API + "/" + id);
 }
 
 export default {
